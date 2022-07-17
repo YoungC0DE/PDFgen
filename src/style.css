@@ -1,0 +1,216 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    box-shadow: none !important;
+    scroll-behavior: smooth !important;
+}
+
+@media (min-width: 1000px) {
+    body {
+        min-width: 1100px;
+        min-height: 100vh;
+    }
+}
+
+#mainApp {
+    height: 100vh;
+    width: 100%;
+}
+
+input,
+label {
+    transition: .3s !important;
+}
+
+hr {
+    margin: 0;
+}
+
+.navBar {
+    font-size: 16pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2%;
+    margin-bottom: 2%;
+}
+
+.navBar .logo {
+    font-size: 20pt;
+}
+
+.menuOptions {
+    width: 30%;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.menuOptions a,
+footer a {
+    text-decoration: none;
+    color: black;
+}
+
+.contentMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.titleInfo {
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 45%;
+    margin-bottom: 3%;
+}
+
+section p {
+    text-align: left;
+    font-size: 18pt;
+}
+
+section div {
+    margin-bottom: 2%;
+}
+
+.multSpace {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0%;
+}
+
+.chooseLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 35%;
+    background-color: #c3c8cd;
+    font-size: 16pt;
+    border: 1px solid #9a9a9a;
+    border-radius: 4px;
+    color: #7e7e7e;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.chooseLogo label {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.chooseLogo:hover {
+    background-color: #a5abaf;
+    color: white;
+}
+
+.moreSpace {
+    width: 60%;
+}
+
+.addValue {
+    border: none;
+    background: none;
+    text-align: left;
+    font-weight: 500;
+    color: #61619c;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
+
+.areaAddRemoveItem {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0%;
+}
+
+.DownloadPDF {
+    width: 45%;
+    height: 10vh;
+    min-height: 10vh;
+    margin-bottom: 5%;
+    font-size: 16pt !important;
+    border-radius: 4px !important;
+}
+
+footer {
+    display: flex;
+    color: white;
+    background-color: rgb(0 0 0 / 87%);
+    height: 20vh;
+    padding: 2%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer a,
+footer a:visited {
+    color: white;
+    font-weight: bold;
+}
+
+footer a:active {
+    color: #61619c;
+}
+
+.service,
+.product {
+    margin-bottom: 1%;
+    padding: 10px;
+    background-color: #c3c8cd;
+    border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+    .navBar {
+        margin-bottom: 5%;
+        padding: 3%;
+    }
+
+    .menuOptions {
+        width: 50%;
+        justify-content: space-between;
+    }
+
+    section {
+        width: 90%;
+    }
+
+    .chooseLogo {
+        font-size: 12pt;
+    }
+
+    .multSpace {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .moreSpace {
+        width: auto;
+    }
+
+    footer span {
+        text-align: center;
+    }
+
+}
