@@ -11,7 +11,7 @@
       </div>
     </nav>
 
-    <main class="contentMain">
+    <form class="contentMain needs-validation" novalidate>
 
       <div class="titleInfo">
         <h1>Gerador de Orçamento</h1>
@@ -21,29 +21,35 @@
       <section>
         <p><i class="bi bi-info-square-fill"></i> Dados do Emissor</p>
         <div class="form-floating">
-          <input type="text" class="form-control" id="Emit_Name" placeholder="Ex: John">
+          <input type="text" class="form-control" id="Emit_Name" v-model="EmitData.Name" required>
           <label for="Emit_Name">Nome ou Razão Social</label>
         </div>
 
         <div class="form-floating">
-          <input type="tel" class="form-control" id="Emit_Tel" placeholder="(99) 99999-9999">
+          <input type="tel" class="form-control" id="Emit_Tel" v-model="EmitData.Tel" required>
           <label for="Emit_Tel">Telefone ou Celular</label>
         </div>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="Emit_Email" placeholder="name@example.com">
+          <input type="email" class="form-control" id="Emit_Email" v-model="EmitData.Email" required>
           <label for="Emit_Email">Email</label>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <input type="url" class="form-control" id="Emit_Site" placeholder="Ex: https://yoursite.com.br">
+            <input type="url" class="form-control" id="Emit_Site" v-model="EmitData.Site">
             <label for="Emit_Site">Website</label>
           </div>
 
           <div class="chooseLogo">
-            <label for="Emit_logo">Logo Marca <i class="bi bi-file-earmark-image"></i></label>
-            <input class="form-control d-none" type="file" id="Emit_logo" accept="image/png, image/jpg, image/jpeg" />
+            <label for="Emit_logo">
+              <span v-if="hasLogo">Delete Logo</span>
+              <span v-else>Upload Logo</span>
+              <i class="bi bi-file-check-fill" v-if="hasLogo"></i>
+              <i class="bi bi-file-earmark-image" v-else></i>
+            </label>
+            <input class="form-control d-none" type="file" id="Emit_logo" accept="image/png, image/jpg, image/jpeg"
+              v-on:input="injectNewPic()" />
           </div>
         </div>
       </section>
@@ -51,35 +57,35 @@
       <section>
         <p><i class="bi bi-info-square-fill"></i> Dados do Destinatário</p>
         <div class="form-floating">
-          <input type="text" class="form-control" id="Dest_Name" placeholder="Ex: John">
+          <input type="text" class="form-control" id="Dest_Name" v-model="DestData.Name" required>
           <label for="Dest_Name">Nome ou Razão Social</label>
         </div>
 
         <div class="form-floating">
-          <input type="tel" class="form-control" id="Dest_Tel" placeholder="(99) 99999-9999">
+          <input type="tel" class="form-control" id="Dest_Tel" v-model="DestData.Tel" required>
           <label for="Dest_Tel">Telefone ou Celular</label>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <input type="text" class="form-control" id="Dest_Address" placeholder="Ex: Avenida">
+            <input type="text" class="form-control" id="Dest_Address" v-model="DestData.Address" required>
             <label for="Dest_Address">Endereço</label>
           </div>
 
           <div class="form-floating">
-            <input type="number" class="form-control" id="Dest_Addnum" placeholder="Ex: 288" min="0">
+            <input type="number" class="form-control" id="Dest_Addnum" min="0" v-model="DestData.Num" required>
             <label for="Dest_Addnum">Número</label>
           </div>
         </div>
 
         <div class="multSpace">
           <div class="form-floating">
-            <input type="text" class="form-control" id="Dest_Address" placeholder="Ex: 00000-000">
+            <input type="text" class="form-control" id="Dest_Address" v-model="DestData.Cep" required>
             <label for="Dest_Address">CEP</label>
           </div>
 
           <div class="moreSpace form-floating">
-            <input type="text" class="form-control" id="Dest_Addnum" placeholder="Ex: 00000-000">
+            <input type="text" class="form-control" id="Dest_Addnum" v-model="DestData.City" required>
             <label for="Dest_Addnum">Cidade</label>
           </div>
         </div>
@@ -89,23 +95,23 @@
         <p><i class="bi bi-info-square-fill"></i> Dados do orçamento</p>
         <div class="multSpace">
           <div class="form-floating">
-            <input type="number" class="form-control" id="Budget_id" placeholder="Ex: 1" min="1" value="1">
-            <label for="Budget_id">Número do orçamento</label>
+            <input type="number" class="form-control" id="BudgetID" min="1" v-model="BudgetData.ID" required>
+            <label for="BudgetID">Número do orçamento</label>
           </div>
 
           <div class="form-floating">
-            <input type="date" class="form-control" id="Budget_Valid" placeholder="dd/mm/yyyy">
+            <input type="date" class="form-control" id="Budget_Valid" v-model="BudgetData.Valid">
             <label for="Budget_Valid">Validade</label>
           </div>
           <div class="form-floating">
-            <input type="date" class="form-control" id="Budget_Warranty" placeholder="dd/mm/yyyy">
+            <input type="date" class="form-control" id="Budget_Warranty" v-model="BudgetData.Warranty">
             <label for="Budget_Warranty">Garantia</label>
           </div>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <select class="form-select" id="Budget_Payment" aria-label="payment">
+            <select class="form-select" id="Budget_Payment" aria-label="payment" required>
               <option selected>Boleto</option>
               <option value="1">Cartão</option>
               <option value="2">Pix</option>
@@ -116,18 +122,19 @@
           </div>
 
           <div class="form-floating">
-            <input type="number" class="form-control" id="Budget_fractPay" placeholder="1x" min="1" value="1">
+            <input type="number" class="form-control" id="Budget_fractPay" min="1" v-model="BudgetData.PayTimes"
+              required>
             <label for="Budget_fractPay">Quantas vezes</label>
           </div>
         </div>
 
         <div class="form-floating">
-          <textarea class="form-control" placeholder="Informações adicionais" id="Budget_info"></textarea>
+          <textarea class="form-control" id="Budget_info"></textarea>
           <label for="Budget_info">Informações adicionais</label>
         </div>
 
         <div class="form-floating">
-          <textarea class="form-control" placeholder="Descrição.." id="Budget_Desc" style="height: 100px"></textarea>
+          <textarea class="form-control" id="Budget_Desc" style="height: 100px"></textarea>
           <label for="Budget_Desc">Descrição do produto ou serviço</label>
         </div>
 
@@ -141,22 +148,22 @@
 
         <div class="product" :show="prodCount > 0" v-for="i in prodCount">
           <div class="form-floating">
-            <input type="text" class="form-control" id="Prod_Name" placeholder="Smart Phone">
+            <input type="text" class="form-control" id="Prod_Name" v-model="ProdData.Name" required>
             <label for="Prod_Name">Nome do Produto</label>
           </div>
 
           <div class="multSpace">
             <div class="form-floating">
-              <input type="number" class="form-control" id="Prod_value" placeholder="Ex: 125" min="0" value="0">
+              <input type="number" class="form-control" id="Prod_value" min="0" v-model="ProdData.Value" required>
               <label for="Prod_value">Valor</label>
             </div>
 
             <div class="form-floating">
-              <input type="number" class="form-control" id="Prod_count" placeholder="Ex: 1" min="1" value="1">
+              <input type="number" class="form-control" id="Prod_count" min="1" v-model="ProdData.Count" required>
               <label for="Prod_count">Quantidade</label>
             </div>
           </div>
-          <select class="form-select" aria-label="Metrics">
+          <select class="form-select" aria-label="Metrics" required>
             <option selected>Selecione a medida</option>
             <option value="1">Metros</option>
             <option value="2">Metros Quadrados</option>
@@ -183,19 +190,19 @@
 
         <div class="service" :show="servCount > 0" v-for="i in servCount">
           <div class="form-floating">
-            <input type="text" class="form-control" id="Serv_Name" placeholder="Smart Phone">
+            <input type="text" class="form-control" id="Serv_Name" v-model="ServData.Name" required>
             <label for="Serv_Name">Serviço</label>
           </div>
 
           <div class="multSpace">
             <div class="form-floating">
-              <input type="number" class="form-control" id="Serv_value" placeholder="Ex: 125" min="0" value="0">
+              <input type="number" class="form-control" id="Serv_value" min="0" v-model="ServData.Value" required>
               <label for="Serv_value">Valor Base</label>
             </div>
 
             <span class="align-self-center">Cobra por:</span>
 
-            <select class="form-select" aria-label="ValueJob" style="margin-bottom: 2%; width: auto;">
+            <select class="form-select" aria-label="ValueJob" style="margin-bottom: 2%; width: auto;" required>
               <option value="1" selected>Minutos</option>
               <option value="2">Horas</option>
               <option value="3">Dias</option>
@@ -206,13 +213,23 @@
         </div>
       </section>
 
-      <button id="DonwloadPDF" type="button" class="DownloadPDF btn btn-success" v-on:click="SavePDF">Baixar PDF <i
-          class="bi bi-download"></i></button>
-    </main>
+      <div class="alert alert-danger w-75 text-center" role="alert" v-show="errorEmpty">
+        Há campos importantes não estão preenchidos!
+      </div>
+
+      <button id="DonwloadPDF" type="submit" class="DownloadPDF btn btn-success" v-on:click.prevent="SavePDF">Baixar PDF
+        <i class="bi bi-download"></i></button>
+    </form>
 
     <footer id="footer">
-      <span>Projeto desenvolvido utilizando: VueJs, Boostrap, CSS e Javascript</span>
-      <span>Link do repositório: <a href="#">github/YoungC0DE</a></span>
+      <div class="descFooter">
+        Projeto desenvolvido utilizando: VueJs, Boostrap, CSS e Javascript
+        <span>Link do repositório: <a href="https://github.com/YoungC0DE/PDFgen" target="_blank">Github</a></span>
+      </div>
+      <div class="AjudaEu">
+        Chave Pix:
+        <img class="pix" src="./assets/pix-pro-pai.png" width="auto">
+      </div>
     </footer>
   </div>
 
@@ -225,22 +242,67 @@ export default {
   name: 'App',
   data() {
     return {
+      EmitData: {},
+      DestData: {},
+      BudgetData: {},
+      ProdData: {},
+      ServData: {},
       prodCount: 0,
-      servCount: 0
+      servCount: 0,
+      hasLogo: false,
+      errorEmpty: false
     }
   },
   methods: {
-    addItem(prop) {
-      prop == 'product' ? this.prodCount += 1 : this.servCount += 1
+    addItem(prop) { prop == 'product' ? this.prodCount += 1 : this.servCount += 1 },
+    removeItem(prop) { prop == 'product' ? this.prodCount -= 1 : this.servCount -= 1 },
+
+    validing() {
+      var forms = document.querySelectorAll('.needs-validation')
+      forms.forEach(form => form.classList.add('was-validated'))
+
+      // validing inputs
+      var inputData = !this.EmitData.Name || !this.EmitData.Tel || !this.EmitData.Email ||
+        !this.DestData.Name || !this.DestData.Tel || !this.DestData.Address ||
+        !this.DestData.City || !this.DestData.Cep
+
+      if (inputData) this.errorEmpty = true
+      else this.errorEmpty = false
     },
-    removeItem(prop) {
-      prop == 'product' ? this.prodCount -= 1 : this.servCount -= 1
+
+    SavePDF() {
+      this.validing()
+      if (this.errorEmpty) return
+
+      var pdf = new jsPDF,
+        DateToday = new Date(),
+        dataTime = DateToday.getDay().toString() + "/" +
+          DateToday.getMonth().toString() + "/" +
+          DateToday.getFullYear().toString(),
+        image = this.BudgetData.logo
+
+      pdf.setFont('times')
+      pdf.setFontSize(10)
+      pdf.text(dataTime, 10, 9)
+      pdf.text('Orçamento', 185, 9)
+      pdf.line(200, 10, 10, 10, 'DF')
+
+      pdf.setFontSize(16)
+      pdf.setLineWidth(0.2);
+      pdf.rect(15, 15, 45, 45);
+      image ? pdf.addImage(image, 'PNG', 17.5, 17.5, 40, 40) : ''
+      pdf.text(`Orçamento ${this.BudgetData.ID == undefined ? '1' : this.BudgetData.ID}`, 80, 20)
+      pdf.line(200, 65, 10, 65, 'DF')
+
+      pdf.save("Orçamento.pdf")
     },
-    SavePDF(){
-      var pdf = new jsPDF
-      pdf.text('Em construção', 10, 10)
-      pdf.save("a4.pdf");
-    }
+    injectNewPic(e) {
+      e.preventDefault()
+      localStorage.setItem('logo', window.URL.createObjectURL(document.getElementById('Emit_logo').files[0]))
+      this.BudgetData.logo = localStorage.getItem('logo')
+      this.hasLogo = document.getElementById('Emit_logo').files[0] != null || localStorage.getItem('logo')
+    },
+
   }
 }
 </script>
