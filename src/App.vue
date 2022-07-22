@@ -1,9 +1,9 @@
 <template>
   <div id="mainApp">
     <nav class="navBar">
-      <div class="logo">
+      <a href="#" class="logo text-dark">
         <i class="bi bi-file-earmark-text"></i> PDFGen
-      </div>
+      </a>
 
       <div class="menuOptions">
         <a href="https://reciboonline.com/orcamento/" target="_blank">References</a>
@@ -26,7 +26,8 @@
         </div>
 
         <div class="form-floating">
-          <input type="tel" class="form-control" id="Emit_Tel" v-model="EmitData.Tel" required>
+          <input type="tel" class="form-control" id="Emit_Tel" v-model="EmitData.Tel" v-maska="'(##) #####-####'"
+            required>
           <label for="Emit_Tel">Telefone ou Celular</label>
         </div>
 
@@ -42,10 +43,10 @@
           </div>
 
           <div class="chooseLogo">
-            <label for="Emit_logo">
-              <span v-if="hasLogo">Delete Logo</span>
+            <label :for="hasLogo ? '' : 'Emit_logo'">
+              <span class="deleteLogo" v-if="hasLogo" v-on:click="deletLogo()">Remove Logo</span>
               <span v-else>Upload Logo</span>
-              <i class="bi bi-file-check-fill" v-if="hasLogo"></i>
+              <i class="deleteLogo bi bi-file-check-fill" v-if="hasLogo" v-on:click="deletLogo()"></i>
               <i class="bi bi-file-earmark-image" v-else></i>
             </label>
             <input class="form-control d-none" type="file" id="Emit_logo" accept="image/png, image/jpg, image/jpeg"
@@ -62,7 +63,8 @@
         </div>
 
         <div class="form-floating">
-          <input type="tel" class="form-control" id="Dest_Tel" v-model="DestData.Tel" required>
+          <input type="tel" class="form-control" id="Dest_Tel" v-model="DestData.Tel" v-maska="'(##) #####-####'"
+            required>
           <label for="Dest_Tel">Telefone ou Celular</label>
         </div>
 
@@ -80,13 +82,14 @@
 
         <div class="multSpace">
           <div class="form-floating">
-            <input type="text" class="form-control" id="Dest_Address" v-model="DestData.Cep" required>
+            <input type="text" class="form-control" id="Dest_Address" v-maska="'#####-###'" min="0" max="8"
+              v-model="DestData.Cep" required>
             <label for="Dest_Address">CEP</label>
           </div>
 
           <div class="moreSpace form-floating">
-            <input type="text" class="form-control" id="Dest_Addnum" v-model="DestData.City" required>
-            <label for="Dest_Addnum">Cidade</label>
+            <input type="text" class="form-control" id="Dest_City" v-model="DestData.City" required>
+            <label for="Dest_City">Cidade</label>
           </div>
         </div>
       </section>
@@ -111,7 +114,7 @@
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <select class="form-select" id="Budget_Payment" aria-label="payment" required>
+            <select class="form-select" id="Budget_Payment" aria-label="payment">
               <option selected>Boleto</option>
               <option value="1">Cartão</option>
               <option value="2">Pix</option>
@@ -154,7 +157,8 @@
 
           <div class="multSpace">
             <div class="form-floating">
-              <input type="number" class="form-control" id="Prod_value" min="0" v-model="ProdData.Value" required>
+              <input type="text" class="form-control" id="Prod_value" min="0" v-model="ProdData.Value"
+                v-maska="'R$ ###.###,###,##'" required>
               <label for="Prod_value">Valor</label>
             </div>
 
@@ -196,7 +200,8 @@
 
           <div class="multSpace">
             <div class="form-floating">
-              <input type="number" class="form-control" id="Serv_value" min="0" v-model="ServData.Value" required>
+              <input type="text" class="form-control" id="Serv_value" min="0" v-model="ServData.Value"
+                v-maska="'R$ ###.###,###,##'" required>
               <label for="Serv_value">Valor Base</label>
             </div>
 
@@ -227,6 +232,7 @@
         <span>Link do repositório: <a href="https://github.com/YoungC0DE/PDFgen" target="_blank">Github</a></span>
       </div>
       <div class="AjudaEu">
+        Me ajude a evoluir o projeto =)<br>
         Chave Pix:
         <img class="pix" src="./assets/pix-pro-pai.png" width="auto">
       </div>
@@ -237,6 +243,7 @@
 
 <script>
 import jsPDF from 'jspdf'
+import { maska } from 'maska'
 
 export default {
   name: 'App',
@@ -253,6 +260,7 @@ export default {
       errorEmpty: false
     }
   },
+  directives: { maska },
   methods: {
     addItem(prop) { prop == 'product' ? this.prodCount += 1 : this.servCount += 1 },
     removeItem(prop) { prop == 'product' ? this.prodCount -= 1 : this.servCount -= 1 },
@@ -272,7 +280,7 @@ export default {
 
     SavePDF() {
       this.validing()
-      if (this.errorEmpty) return
+      //if (this.errorEmpty) return
 
       var pdf = new jsPDF,
         DateToday = new Date(),
@@ -281,28 +289,41 @@ export default {
           DateToday.getFullYear().toString(),
         image = this.BudgetData.logo
 
-      pdf.setFont('times')
+      pdf.setFont('arial')
       pdf.setFontSize(10)
       pdf.text(dataTime, 10, 9)
       pdf.text('Orçamento', 185, 9)
-      pdf.line(200, 10, 10, 10, 'DF')
 
-      pdf.setFontSize(16)
-      pdf.setLineWidth(0.2);
-      pdf.rect(15, 15, 45, 45);
-      image ? pdf.addImage(image, 'PNG', 17.5, 17.5, 40, 40) : ''
-      pdf.text(`Orçamento ${this.BudgetData.ID == undefined ? '1' : this.BudgetData.ID}`, 80, 20)
-      pdf.line(200, 65, 10, 65, 'DF')
+      if (this.hasLogo) {
+        pdf.line(200, 10, 10, 10, 'DF')
+        pdf.setFontSize(20)
+        pdf.setLineWidth(0.2);
+        pdf.rect(15, 15, 45, 45);
+        pdf.addImage(image, 'PNG', 17.5, 17.5, 40, 40)
+        pdf.text(`Orçamento ${this.BudgetData.ID == undefined ? '1' : this.BudgetData.ID}`, 80, 20)
+        pdf.line(200, 65, 10, 65, 'DF')
+      }
+      else {
+        pdf.setFontSize(35)
+        pdf.setFont('arial','bold')
+        pdf.text('Orçamento', 15, 22)
+        pdf.setFontSize(15)
+        pdf.text(`Nº ${this.BudgetData.ID == undefined ? '1' : this.BudgetData.ID}`, 17, 30)
+        pdf.line(200, 40, 10, 40, 'DF')
+      }
 
       pdf.save("Orçamento.pdf")
     },
-    injectNewPic(e) {
-      e.preventDefault()
+    injectNewPic() {
       localStorage.setItem('logo', window.URL.createObjectURL(document.getElementById('Emit_logo').files[0]))
       this.BudgetData.logo = localStorage.getItem('logo')
       this.hasLogo = document.getElementById('Emit_logo').files[0] != null || localStorage.getItem('logo')
     },
-
+    deletLogo() {
+      this.hasLogo = false
+      localStorage.removeItem('logo')
+      console.log(this.hasLogo, localStorage.getItem('logo'))
+    }
   }
 }
 </script>
