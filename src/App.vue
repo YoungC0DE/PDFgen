@@ -90,7 +90,8 @@
           </div>
 
           <div class="moreSpace form-floating">
-            <input type="text" class="form-control" id="Dest_City" placeholder="data" v-model="DestData.City" required>
+            <input type="text" class="form-control" id="Dest_City" placeholder="data" max="999" v-model="DestData.City"
+              required>
             <label for="Dest_City">Cidade</label>
           </div>
         </div>
@@ -100,8 +101,7 @@
         <p><i class="bi bi-info-square-fill"></i> Dados do orçamento</p>
         <div class="multSpace">
           <div class="form-floating">
-            <input type="number" class="form-control" id="BudgetID" min="1" placeholder="data" v-model="BudgetData.ID"
-              required>
+            <input type="number" class="form-control" id="BudgetID" placeholder="data" v-model="BudgetData.ID" required>
             <label for="BudgetID">Número do orçamento</label>
           </div>
 
@@ -380,7 +380,8 @@ export default {
 
         var TotalValueServ = 0,
           TotalValueProd = 0,
-          Qta = 0
+          QtaProd = 0,
+          QtaServ = 0
 
         if (this.prodCount > 0 && this.servCount > 0) {
           for (let x = 0; x < this.prodCount; x++) {
@@ -390,8 +391,7 @@ export default {
             pdf.text(`${this.ProdData.Name[x]} .... ${this.ProdData.Value[x]} .... Qtda: ${this.ProdData.Count[x]} ${this.ProdData.Metric[x]}`, 32, this.hasLogo ? (120 + (x * 5)) : (100 + (x * 5)))
             let totalTemp = (this.ProdData.Value[x].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
             TotalValueProd += parseInt(totalTemp.substring(0, totalTemp.length - 2))
-            Qta += this.ProdData.Count[x]
-            console.log(TotalValueProd, Qta)
+            QtaProd += this.ProdData.Count[x]
           }
 
           for (let y = 0; y < this.servCount; y++) {
@@ -406,19 +406,19 @@ export default {
               pdf.setFont("Courier", "Bold")
               pdf.text('Serviço:', 10, this.hasLogo ? (135 + (y * 5) + (this.prodCount * 2)) : (115 + (y * 5) + (this.prodCount * 2)))
               pdf.setFont("Courier", "")
-              pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}`, 32, this.hasLogo ? (135 + (y * 5) + (this.prodCount * 2)) : (115 + (y * 5) + (this.prodCount * 2)))
+              pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}(s)`, 32, this.hasLogo ? (135 + (y * 5) + (this.prodCount * 2)) : (115 + (y * 5) + (this.prodCount * 2)))
             }
             else if (this.prodCount > 6 && this.prodCount <= 10) {
               pdf.setFont("Courier", "Bold")
               pdf.text('Serviço:', 10, this.hasLogo ? (140 + (y * 5) + (this.prodCount * 3)) : (115 + (y * 5) + (this.prodCount * 4)))
               pdf.setFont("Courier", "")
-              pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}`, 32, this.hasLogo ? (140 + (y * 5) + (this.prodCount * 3)) : (115 + (y * 5) + (this.prodCount * 4)))
+              pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}(s)`, 32, this.hasLogo ? (140 + (y * 5) + (this.prodCount * 3)) : (115 + (y * 5) + (this.prodCount * 4)))
             }
             let totalTemp = (this.ServData.Value[y].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
             TotalValueServ += parseInt(totalTemp.substring(0, totalTemp.length - 2))
-
+            this.ServData.Count[y] > 1 ? QtaServ += this.ServData.Count[y] : 0
           }
-          let total = (TotalValueProd * Qta) + TotalValueServ
+          let total = (TotalValueProd * QtaProd) + (TotalValueServ * QtaServ)
           console.log(TotalValueServ, TotalValueProd)
           total = total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
 
@@ -520,20 +520,20 @@ export default {
             pdf.text(`${this.ProdData.Name[x]} ..... ${this.ProdData.Value[x]} .... Qtda: ${this.ProdData.Count[x]} ${this.ProdData.Metric[x]}`, 32, this.hasLogo ? (120 + (x * 5)) : (100 + (x * 5)))
             let totalTemp = (this.ProdData.Value[x].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
             TotalValueProd += parseInt(totalTemp.substring(0, totalTemp.length - 2))
-            Qta += this.ProdData.Count[x]
+            QtaProd += this.ProdData.Count[x]
           }
 
           for (let y = 0; y < this.servCount; y++) {
             pdf.setFont("Courier", "Bold")
             pdf.text('Serviço:', 10, this.hasLogo ? (120 + (y * 5)) : (100 + (y * 5)))
             pdf.setFont("Courier", "")
-            pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Metric[y]}`, 32, this.hasLogo ? (120 + (y * 5)) : (100 + (y * 5)))
+            pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}(s)`, 32, this.hasLogo ? (120 + (y * 5)) : (100 + (y * 5)))
             let totalTemp = (this.ServData.Value[y].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
             TotalValueServ += parseInt(totalTemp.substring(0, totalTemp.length - 2))
-
+            this.ServData.Count[y] > 1 ? QtaServ += this.ServData.Count[y] : 0
           }
 
-          let total = (TotalValueProd * Qta) + TotalValueServ
+          let total = (TotalValueProd * QtaProd) + (TotalValueServ * QtaServ)
           console.log(TotalValueServ, TotalValueProd)
           total = total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
 
