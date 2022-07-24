@@ -101,7 +101,7 @@
         <p><i class="bi bi-info-square-fill"></i> Dados do orçamento</p>
         <div class="multSpace">
           <div class="form-floating">
-            <input type="number" class="form-control" id="BudgetID" v-maska="###" placeholder="data" v-model="BudgetData.ID" required>
+            <input type="number" class="form-control" id="BudgetID" v-maska="'###'" placeholder="data" v-model="BudgetData.ID" required>
             <label for="BudgetID">Número do orçamento</label>
           </div>
 
