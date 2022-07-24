@@ -90,7 +90,7 @@
           </div>
 
           <div class="moreSpace form-floating">
-            <input type="text" class="form-control" id="Dest_City" placeholder="data" max="999" v-model="DestData.City"
+            <input type="text" class="form-control" id="Dest_City" placeholder="data" v-model="DestData.City"
               required>
             <label for="Dest_City">Cidade</label>
           </div>
@@ -101,7 +101,7 @@
         <p><i class="bi bi-info-square-fill"></i> Dados do orçamento</p>
         <div class="multSpace">
           <div class="form-floating">
-            <input type="number" class="form-control" id="BudgetID" placeholder="data" v-model="BudgetData.ID" required>
+            <input type="number" class="form-control" id="BudgetID" max="999" placeholder="data" v-model="BudgetData.ID" required>
             <label for="BudgetID">Número do orçamento</label>
           </div>
 
