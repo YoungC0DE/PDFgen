@@ -21,24 +21,24 @@
       <section>
         <p><i class="bi bi-info-square-fill"></i> Dados do Emissor</p>
         <div class="form-floating">
-          <input type="text" class="form-control" id="Emit_Name" v-model="EmitData.Name" required>
+          <input type="text" class="form-control" id="Emit_Name" v-model="EmitData.Name" placeholder="data" required>
           <label for="Emit_Name">Nome ou Razão Social</label>
         </div>
 
         <div class="form-floating">
           <input type="tel" class="form-control" id="Emit_Tel" v-model="EmitData.Tel"
-            v-maska="['(##) ####-####', '(##) #####-####']" required>
+            v-maska="['(##) ####-####', '(##) #####-####']" placeholder="data" required>
           <label for="Emit_Tel">Telefone ou Celular</label>
         </div>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="Emit_Email" v-model="EmitData.Email" required>
+          <input type="email" class="form-control" id="Emit_Email" placeholder="data" v-model="EmitData.Email" required>
           <label for="Emit_Email">Email</label>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <input type="url" class="form-control" id="Emit_Site" v-model="EmitData.Site">
+            <input type="url" class="form-control" id="Emit_Site" placeholder="data" v-model="EmitData.Site">
             <label for="Emit_Site">Website</label>
           </div>
 
@@ -58,37 +58,39 @@
       <section>
         <p><i class="bi bi-info-square-fill"></i> Dados do Destinatário</p>
         <div class="form-floating">
-          <input type="text" class="form-control" id="Dest_Name" v-model="DestData.Name" required>
+          <input type="text" class="form-control" id="Dest_Name" placeholder="data" v-model="DestData.Name" required>
           <label for="Dest_Name">Nome ou Razão Social</label>
         </div>
 
         <div class="form-floating">
-          <input type="tel" class="form-control" id="Dest_Tel" v-model="DestData.Tel"
+          <input type="tel" class="form-control" id="Dest_Tel" placeholder="data" v-model="DestData.Tel"
             v-maska="['(##) ####-####', '(##) #####-####']" required>
           <label for="Dest_Tel">Telefone ou Celular</label>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <input type="text" class="form-control" id="Dest_Address" v-model="DestData.Address" required>
+            <input type="text" class="form-control" id="Dest_Address" placeholder="data" v-model="DestData.Address"
+              required>
             <label for="Dest_Address">Endereço</label>
           </div>
 
           <div class="form-floating">
-            <input type="number" class="form-control" id="Dest_Addnum" min="0" v-model="DestData.Num" required>
+            <input type="number" class="form-control" id="Dest_Addnum" placeholder="data" min="0" v-model="DestData.Num"
+              required>
             <label for="Dest_Addnum">Número</label>
           </div>
         </div>
 
         <div class="multSpace">
           <div class="form-floating">
-            <input type="text" class="form-control" id="Dest_Address" v-maska="'#####-###'" min="0" max="8"
-              v-model="DestData.Cep" required>
+            <input type="text" class="form-control" id="Dest_Address" placeholder="data" v-maska="'#####-###'" min="0"
+              max="8" v-model="DestData.Cep" required>
             <label for="Dest_Address">CEP</label>
           </div>
 
           <div class="moreSpace form-floating">
-            <input type="text" class="form-control" id="Dest_City" v-model="DestData.City" required>
+            <input type="text" class="form-control" id="Dest_City" placeholder="data" v-model="DestData.City" required>
             <label for="Dest_City">Cidade</label>
           </div>
         </div>
@@ -98,52 +100,49 @@
         <p><i class="bi bi-info-square-fill"></i> Dados do orçamento</p>
         <div class="multSpace">
           <div class="form-floating">
-            <input type="number" class="form-control" id="BudgetID" min="1" v-model="BudgetData.ID" required>
+            <input type="number" class="form-control" id="BudgetID" min="1" placeholder="data" v-model="BudgetData.ID"
+              required>
             <label for="BudgetID">Número do orçamento</label>
           </div>
 
           <div class="form-floating">
-            <input type="date" class="form-control" id="Budget_Valid" v-model="BudgetData.Valid">
+            <input type="date" class="form-control" id="Budget_Valid" placeholder="data" v-model="BudgetData.Valid">
             <label for="Budget_Valid">Validade</label>
           </div>
           <div class="form-floating">
-            <input type="date" class="form-control" id="Budget_Warranty" v-model="BudgetData.Warranty">
+            <input type="date" class="form-control" id="Budget_Warranty" placeholder="data"
+              v-model="BudgetData.Warranty">
             <label for="Budget_Warranty">Garantia</label>
           </div>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <select class="form-select" id="Budget_Payment" aria-label="payment">
-              <option selected>Boleto</option>
-              <option value="1">Cartão</option>
-              <option value="2">Pix</option>
-              <option value="3">Transferência</option>
-              <option value="4">Outros</option>
+            <select class="form-select" id="Budget_Payment" aria-label="payment" placeholder="data"
+              v-model="BudgetData.payment" required>
+              <option v-for="option in payment" selected="{{option == BudgetData.Payment}}">
+                {{ option }}
+              </option>
             </select>
             <label for="Budget_Payment">Forma de Pagamento</label>
           </div>
 
           <div class="form-floating">
-            <input type="number" class="form-control" id="Budget_fractPay" min="1" v-model="BudgetData.PayTimes"
-              required>
+            <input type="number" class="form-control" id="Budget_fractPay" min="1" placeholder="data"
+              v-model="BudgetData.PayTimes" required>
             <label for="Budget_fractPay">Quantas vezes</label>
           </div>
         </div>
 
         <div class="form-floating">
-          <textarea class="form-control" id="Budget_info"></textarea>
-          <label for="Budget_info">Informações adicionais</label>
-        </div>
-
-        <div class="form-floating">
-          <textarea class="form-control" id="Budget_Desc" style="height: 100px"></textarea>
-          <label for="Budget_Desc">Descrição do produto ou serviço</label>
+          <textarea class="form-control" placeholder="data" id="Budget_Desc" maxlength="250" style="height: 100px"
+            v-model="BudgetData.Info"></textarea>
+          <label for="Budget_Desc">Informações Adicionais</label>
         </div>
 
         <div class="areaAddRemoveItem">
-          <button id="addProd" class="addValue" type="button" v-on:click="addItem('product')">Adicionar Produto <i
-              class="bi bi-plus-circle"></i></button>
+          <button id="addProd" class="addValue" type="button" v-on:click="addItem('product')"
+            v-show="prodCount < 10">Adicionar Produto ({{ prodCount }}/10) <i class="bi bi-plus-circle"></i></button>
           <button id="removeProd" class="addValue" v-if="prodCount > 0" type="button"
             v-on:click="removeItem('product')">Remover Produto <i class="bi bi-dash-circle"></i></button>
         </div>
@@ -151,38 +150,37 @@
 
         <div class="product" :show="prodCount > 0" v-for="i in prodCount">
           <div class="form-floating">
-            <input type="text" class="form-control" id="Prod_Name" v-model="ProdData.Name[i - 1]" required>
+            <input type="text" class="form-control" id="Prod_Name" maxlength="20" placeholder="data"
+              v-model="ProdData.Name[i - 1]" required>
             <label for="Prod_Name">Nome do Produto</label>
           </div>
 
           <div class="multSpace">
             <div class="form-floating">
-              <input type="text" class="form-control" id="Prod_value" min="0" v-model="ProdData.Value"
+              <input type="text" class="form-control" id="Prod_value" min="0" placeholder="data"
+                v-model="ProdData.Value[i - 1]"
                 v-maska="['R$ #,##', 'R$ ##,##', 'R$ ###,##', 'R$ #.###,##', 'R$ ##.###,##', 'R$ ###.###,##', 'R$ #.###.###,##', 'R$ ##.###.###,##', 'R$ ###.###.###,##']"
                 required>
               <label for="Prod_value">Valor</label>
             </div>
 
             <div class="form-floating">
-              <input type="number" class="form-control" id="Prod_count" min="1" v-model="ProdData.Count" required>
+              <input type="number" class="form-control" id="Prod_count" placeholder="data" min="1"
+                v-model="ProdData.Count[i - 1]" required>
               <label for="Prod_count">Quantidade</label>
             </div>
           </div>
-          <select class="form-select" aria-label="Metrics" required>
-            <option value="1" selected>Unidade</option>
-            <option value="2">Metros</option>
-            <option value="3">Metros Quadrados</option>
-            <option value="4">Centímetros</option>
-            <option value="5">Quilômetros</option>
-            <option value="6">Gramas</option>
-            <option value="7">Litros</option>
-            <option value="8">Quilo</option>
+          <span>Medida:</span>
+          <select class="form-select" aria-label="Metrics" v-model="ProdData.Metric[i - 1]" required>
+            <option v-for="option in metricOptionProd" selected="{{option == ProdData.Metric[i - 1]}}">
+              {{ option }}
+            </option>
           </select>
         </div>
 
         <div class="areaAddRemoveItem" style="margin-top: 3%;">
-          <button id="addServ" class="addValue" type="button" v-on:click="addItem('service')">Adicionar Serviço <i
-              class="bi bi-plus-circle"></i></button>
+          <button id="addServ" class="addValue" type="button" v-on:click="addItem('service')"
+            v-show="servCount < 10">Adicionar Serviço ({{ servCount }}/10)<i class="bi bi-plus-circle"></i></button>
           <button id="removeServ" class="addValue" v-if="servCount > 0" type="button"
             v-on:click="removeItem('service')">Remover Serviço <i class="bi bi-dash-circle"></i></button>
         </div>
@@ -190,28 +188,32 @@
 
         <div class="service" :show="servCount > 0" v-for="i in servCount">
           <div class="form-floating">
-            <input type="text" class="form-control" id="Serv_Name" v-model="ServData.Name[i - 1]" required>
+            <input type="text" class="form-control" id="Serv_Name" maxlength="20" placeholder="data"
+              v-model="ServData.Name[i - 1]" required>
             <label for="Serv_Name">Serviço</label>
           </div>
 
           <div class="multSpace">
             <div class="form-floating">
-              <input type="text" class="form-control" id="Serv_value" min="0" max="15" v-model="ServData.Value"
+              <input type="text" class="form-control" id="Serv_value" placeholder="data" min="0" max="15"
+                v-model="ServData.Value[i - 1]"
                 v-maska="['R$ #,##', 'R$ ##,##', 'R$ ###,##', 'R$ #.###,##', 'R$ ##.###,##', 'R$ ###.###,##', 'R$ #.###.###,##', 'R$ ##.###.###,##', 'R$ ###.###.###,##']"
                 required>
               <label for="Serv_value">Valor Base</label>
             </div>
 
-            <span class="align-self-center">Cobra por:</span>
-
-            <select class="form-select" aria-label="ValueJob" style="margin-bottom: 2%; width: auto;" required>
-              <option value="1" selected>Minutos</option>
-              <option value="2">Horas</option>
-              <option value="3">Dias</option>
-              <option value="4">Meses</option>
-              <option value="5">Anos</option>
-            </select>
+            <div class="form-floating">
+              <input type="number" class="form-control" id="Serv_count" placeholder="data" min="1"
+                v-model="ServData.Count[i - 1]" required>
+              <label for="Serv_count">Quantidade</label>
+            </div>
           </div>
+          <span>Medida:</span>
+          <select class="form-select" v-model="ServData.Metric[i - 1]" required>
+            <option v-for="option in metricOptionServ" selected="{{option == ServData.Metric[i - 1]}}">
+              {{ option }}
+            </option>
+          </select>
         </div>
       </section>
 
@@ -226,7 +228,9 @@
     <footer id="footer">
       <div class="descFooter">
         Projeto desenvolvido utilizando: VueJs, Boostrap, CSS e Javascript
-        <span>Link do repositório: <a href="https://github.com/YoungC0DE/PDFgen" target="_blank">Github</a></span>
+        <span>Mande um Email para: <b>rafaelwolowitz@gmail.com</b></span>
+        <span>Link do repositório: <a href="https://github.com/YoungC0DE/PDFgen" target="_blank">Github/YoungC0DE <i
+              class="bi bi-box-arrow-up-right"></i></a></span>
       </div>
       <div class="AjudaEu">
         Me ajude a evoluir o projeto =)<br>
@@ -250,15 +254,24 @@ export default {
       DestData: {},
       BudgetData: {},
       ProdData: {
-        Name: []
+        Name: [],
+        Value: [],
+        Count: [],
+        Metric: []
       },
       ServData: {
-        Name: []
+        Name: [],
+        Value: [],
+        Count: [],
+        Metric: []
       },
       prodCount: 0,
       servCount: 0,
       hasLogo: false,
-      errorEmpty: false
+      errorEmpty: false,
+      payment: ['Boleto', 'Cartão', 'Pix', 'Transferência', 'Outros'],
+      metricOptionProd: ['un', 'm', 'm²', 'cm', 'km', 'g', 'L', 'kg'],
+      metricOptionServ: ['Minuto', 'Hora', 'Dia', 'Mês', 'Ano']
     }
   },
   directives: { maska },
@@ -273,7 +286,8 @@ export default {
       // validing inputs
       var inputData = !this.EmitData.Name || !this.EmitData.Tel || !this.EmitData.Email ||
         !this.DestData.Name || !this.DestData.Tel || !this.DestData.Address ||
-        !this.DestData.City || !this.DestData.Cep
+        !this.DestData.City || !this.DestData.Cep || !this.ProdData.Name || !this.ServData.Name ||
+        !this.BudgetData.ID || !this.BudgetData.PayTimes
 
       if (inputData) this.errorEmpty = true
       else this.errorEmpty = false
@@ -281,12 +295,15 @@ export default {
 
     SavePDF() {
       this.validing()
-      //if (this.errorEmpty) return
+      if (this.errorEmpty) return
 
       var pdf = new jsPDF('p', 'mm', [297, 210]),
         font = './src/fonts/CourierPrime-Regular.ttf',
         fontBold = './src/fonts/CourierPrime-Bold.ttf',
         DateToday = new Date(),
+        hour = DateToday.getHours().toString(),
+        minutes = DateToday.getMinutes().toString(),
+        seconds = DateToday.getSeconds().toString(),
         day = DateToday.getDate().toString().padStart(2, '0'),
         month = (DateToday.getMonth() + 1).toString().padStart(2, '0'),
         year = DateToday.getFullYear().toString(),
@@ -295,11 +312,11 @@ export default {
 
       pdf.addFileToVFS("CourierPrime-Regular.ttf", font);
       pdf.addFileToVFS("CourierPrime-Bold.ttf", fontBold);
-      pdf.addFont("CourierPrime-Regular.ttf", "courier");
-      pdf.addFont("CourierPrime-Bold.ttf", "courier-bold");
-      pdf.setFont("courier")
+      pdf.addFont("CourierPrime-Regular.ttf", "Courier");
+      pdf.addFont("CourierPrime-Bold.ttf", "CourierBold");
+      pdf.setFont("Courier", "")
       pdf.setFontSize(8)
-      pdf.text(`${day}/${month}/${year}`, 10, 9)
+      pdf.text(`${day}/${month}/${year} ${hour}:${minutes}:${seconds}`, 10, 9)
       pdf.text('Orçamento', 185, 9)
 
       if (this.hasLogo) {
@@ -308,13 +325,13 @@ export default {
         pdf.rect(15, 15, 45, 45)
         pdf.addImage(image, 'PNG', 17.5, 17.5, 40, 40)
         pdf.setFontSize(40)
-        pdf.setFont("courier-bold")
-        pdf.text(`Orçamento Nº ${this.BudgetData.ID == undefined ? '1' : this.BudgetData.ID}`, 70, 25)
+        pdf.setFont("Courier", "Bold")
+        pdf.text(`Orçamento Nº ${this.BudgetData.ID}`, 70, 25)
 
         pdf.setFontSize(12)
-        pdf.setFont("courier-bold")
+        pdf.setFont("Courier", "Bold")
         pdf.text('Dados do Emissor', 70, 38, 'left')
-        pdf.setFont("courier");
+        pdf.setFont("Courier", "")
         pdf.text(`Nome: ${this.EmitData.Name}`, 70, 45, 'left')
         pdf.text(`Contato: ${this.EmitData.Tel}`, 70, 50, 'left')
         pdf.text(`Email: ${this.EmitData.Email}`, 70, 55, 'left')
@@ -323,15 +340,15 @@ export default {
       }
       else {
         pdf.setFontSize(40)
-        pdf.setFont("courier-bold")
+        pdf.setFont("Courier", "Bold")
         pdf.text('Orçamento', 15, 25)
         pdf.setFontSize(20)
         pdf.text(`Nº ${this.BudgetData.ID == undefined ? '1' : this.BudgetData.ID}`, 17, 35)
 
         pdf.setFontSize(12)
-        pdf.setFont("courier-bold")
+        pdf.setFont("Courier", "Bold")
         pdf.text('Dados do Emissor', 200, 20, 'right')
-        pdf.setFont("courier")
+        pdf.setFont("Courier", "")
         pdf.text(`Nome: ${this.EmitData.Name}`, 200, 25, 'right')
         pdf.text(`Contato: ${this.EmitData.Tel}`, 200, 30, 'right')
         pdf.text(`Email: ${this.EmitData.Email}`, 200, 35, 'right')
@@ -339,19 +356,20 @@ export default {
         pdf.line(200, 42, 10, 42, 'DF')
       }
 
-      pdf.setFontSize(12)
-      pdf.setFont("courier-bold")
+      pdf.setFontSize(11)
+      pdf.setFont("Courier", "Bold")
       pdf.text('Data da emissão: ', 10, this.hasLogo ? 72 : 48, 'left')
-      pdf.setFont("courier")
-      pdf.text(`${day} de ${months[DateToday.getMonth()]} de ${year}`, 42, this.hasLogo ? 72 : 48)
-      pdf.setFont("courier-bold")
+      pdf.setFont("Courier", "")
+      pdf.text(`${day} de ${months[DateToday.getMonth()]} de ${year}`, 48, this.hasLogo ? 72 : 48)
+      pdf.setFont("Courier", "Bold")
       pdf.text('Situação do Orçamento: ', 105, this.hasLogo ? 72 : 48)
-      pdf.setFont("courier")
-      pdf.text('Aguardando Retorno.', 150, this.hasLogo ? 72 : 48,)
+      pdf.setFont("Courier", "")
+      pdf.text('Aguardando Retorno.', 158, this.hasLogo ? 72 : 48,)
 
-      pdf.setFont("courier-bold")
+      pdf.setFontSize(12)
+      pdf.setFont("Courier", "Bold")
       pdf.text('Dados do Cliente', 10, this.hasLogo ? 83 : 63)
-      pdf.setFont("courier")
+      pdf.setFont("Courier", "")
       pdf.text(`Nome: ${this.DestData.Name}`, 10, this.hasLogo ? 90 : 70, 'left')
       pdf.text(`Contato: ${this.DestData.Tel}`, 10, this.hasLogo ? 95 : 75, 'left')
       pdf.text(`Endereço: ${this.DestData.Address}, ${this.DestData.Num} - ${this.DestData.City} `, 10, this.hasLogo ? 100 : 80, 'left')
@@ -360,38 +378,281 @@ export default {
 
       if (this.prodCount > 0 || this.servCount > 0) {
 
+        var TotalValueServ = 0,
+          TotalValueProd = 0,
+          Qta = 0
+
         if (this.prodCount > 0 && this.servCount > 0) {
           for (let x = 0; x < this.prodCount; x++) {
-            pdf.setFont("courier-bold")
-            pdf.text('Produto:', 10, this.hasLogo ? (160 + (x * 5)) : (100 + (x * 5)))
-            pdf.setFont("courier")
-            pdf.text(`${this.ProdData.Name[x]}`, 26, this.hasLogo ? (160 + (x * 5)) : (100 + (x * 5)))
+            pdf.setFont("Courier", "Bold")
+            pdf.text('Produto:', 10, this.hasLogo ? (120 + (x * 5)) : (100 + (x * 5)))
+            pdf.setFont("Courier", "")
+            pdf.text(`${this.ProdData.Name[x]} .... ${this.ProdData.Value[x]} .... Qtda: ${this.ProdData.Count[x]} ${this.ProdData.Metric[x]}`, 32, this.hasLogo ? (120 + (x * 5)) : (100 + (x * 5)))
+            let totalTemp = (this.ProdData.Value[x].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
+            TotalValueProd += parseInt(totalTemp.substring(0, totalTemp.length - 2))
+            Qta += this.ProdData.Count[x]
+            console.log(TotalValueProd, Qta)
           }
 
           for (let y = 0; y < this.servCount; y++) {
-            pdf.setFont("courier-bold")
-            pdf.text('Serviço:', 10, this.hasLogo ? (170 + (y * 5)) : (120 + (y * 5)))
-            pdf.setFont("courier")
-            pdf.text(`${this.ServData.Name[y]}`, 26, this.hasLogo ? (170 + (y * 5)) : (120 + (y * 5)))
+
+            if (this.prodCount <= 2) {
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Serviço:', 10, this.hasLogo ? (130 + (y * 5)) : (110 + (y * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}`, 32, this.hasLogo ? (130 + (y * 5)) : (110 + (y * 5)))
+            }
+            else if (this.prodCount >= 3 && this.prodCount <= 6) {
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Serviço:', 10, this.hasLogo ? (135 + (y * 5) + (this.prodCount * 2)) : (115 + (y * 5) + (this.prodCount * 2)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}`, 32, this.hasLogo ? (135 + (y * 5) + (this.prodCount * 2)) : (115 + (y * 5) + (this.prodCount * 2)))
+            }
+            else if (this.prodCount > 6 && this.prodCount <= 10) {
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Serviço:', 10, this.hasLogo ? (140 + (y * 5) + (this.prodCount * 3)) : (115 + (y * 5) + (this.prodCount * 4)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Count[y]} ${this.ServData.Metric[y]}`, 32, this.hasLogo ? (140 + (y * 5) + (this.prodCount * 3)) : (115 + (y * 5) + (this.prodCount * 4)))
+            }
+            let totalTemp = (this.ServData.Value[y].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
+            TotalValueServ += parseInt(totalTemp.substring(0, totalTemp.length - 2))
+
+          }
+          let total = (TotalValueProd * Qta) + TotalValueServ
+          console.log(TotalValueServ, TotalValueProd)
+          total = total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
+
+          pdf.setFont("Courier", "Bold")
+          pdf.setFontSize(18)
+          pdf.text('Valor Total', 195, this.hasLogo ? (125 + ((this.servCount + this.prodCount) * 5)) : (110 + ((this.servCount + this.prodCount) * 5)), 'right')
+          pdf.setFont("Courier", "")
+          pdf.setFontSize(16)
+          pdf.text(total, 195, this.hasLogo ? (132 + ((this.servCount + this.prodCount) * 5)) : (118 + ((this.servCount + this.prodCount) * 5)), 'right')
+
+          this.hasLogo
+            ? pdf.line(200, (140 + ((this.servCount + this.prodCount) * 5)), 10, (140 + ((this.servCount + this.prodCount) * 5)), 'DF')
+            : pdf.line(200, (122 + ((this.servCount + this.prodCount) * 5)), 10, (122 + ((this.servCount + this.prodCount) * 5)), 'DF')
+
+          if (this.BudgetData.Info) {
+            pdf.setFont("Courier", "Bold")
+            pdf.setFontSize(12)
+            pdf.text('Mais detalhes', 10, this.hasLogo ? (150 + ((this.servCount + this.prodCount) * 5)) : (130 + ((this.servCount + this.prodCount) * 5)))
+            pdf.setFont("Courier", "")
+            var InfoBudget = pdf.splitTextToSize(this.BudgetData.Info, 195)
+            pdf.text(InfoBudget, 10, this.hasLogo ? (155 + ((this.servCount + this.prodCount) * 5)) : (135 + ((this.servCount + this.prodCount) * 5)))
+
+            if (this.hasLogo) {
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (190 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (190 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (200 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (200 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (210 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (210 + ((this.servCount + this.prodCount) * 5)))
+            }
+            else {
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (160 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (160 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (170 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (170 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (180 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (180 + ((this.servCount + this.prodCount) * 5)))
+            }
+          }
+          else {
+            if (this.hasLogo) {
+              pdf.setFontSize(12)
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (160 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (160 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (170 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (170 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (180 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (180 + ((this.servCount + this.prodCount) * 5)))
+
+            }
+            else {
+              pdf.setFontSize(12)
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (130 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (130 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (140 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (140 + ((this.servCount + this.prodCount) * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (150 + ((this.servCount + this.prodCount) * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (150 + ((this.servCount + this.prodCount) * 5)))
+            }
           }
         }
         else {
           for (let x = 0; x < this.prodCount; x++) {
-            pdf.setFont("courier-bold")
-            pdf.text('Produto:', 10, this.hasLogo ? (160 + (x * 5)) : (100 + (x * 5)))
-            pdf.setFont("courier")
-            pdf.text(`${this.ProdData.Name[x]}`, 26, this.hasLogo ? (160 + (x * 5)) : (100 + (x * 5)))
+            pdf.setFont("Courier", "Bold")
+            pdf.text('Produto:', 10, this.hasLogo ? (120 + (x * 5)) : (100 + (x * 5)))
+            pdf.setFont("Courier", "")
+            pdf.text(`${this.ProdData.Name[x]} ..... ${this.ProdData.Value[x]} .... Qtda: ${this.ProdData.Count[x]} ${this.ProdData.Metric[x]}`, 32, this.hasLogo ? (120 + (x * 5)) : (100 + (x * 5)))
+            let totalTemp = (this.ProdData.Value[x].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
+            TotalValueProd += parseInt(totalTemp.substring(0, totalTemp.length - 2))
+            Qta += this.ProdData.Count[x]
           }
 
           for (let y = 0; y < this.servCount; y++) {
-            pdf.setFont("courier-bold")
-            pdf.text('Serviço:', 10, this.hasLogo ? (160 + (y * 5)) : (100 + (y * 5)))
-            pdf.setFont("courier")
-            pdf.text(`${this.ServData.Name[y]}`, 26, this.hasLogo ? (160 + (y * 5)) : (100 + (y * 5)))
-          }
-        }
+            pdf.setFont("Courier", "Bold")
+            pdf.text('Serviço:', 10, this.hasLogo ? (120 + (y * 5)) : (100 + (y * 5)))
+            pdf.setFont("Courier", "")
+            pdf.text(`${this.ServData.Name[y]} .... ${this.ServData.Value[y]} /${this.ServData.Metric[y]}`, 32, this.hasLogo ? (120 + (y * 5)) : (100 + (y * 5)))
+            let totalTemp = (this.ServData.Value[y].toString()).replaceAll('R$ ', '').replaceAll('.', '').replaceAll(',', '')
+            TotalValueServ += parseInt(totalTemp.substring(0, totalTemp.length - 2))
 
+          }
+
+          let total = (TotalValueProd * Qta) + TotalValueServ
+          console.log(TotalValueServ, TotalValueProd)
+          total = total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })
+
+          if (this.prodCount > 0) {
+            pdf.setFont("Courier", "Bold")
+            pdf.setFontSize(18)
+            pdf.text('Valor Total', 195, this.hasLogo ? (125 + this.prodCount * 5) : (110 + (this.prodCount * 5)), 'right')
+            pdf.setFont("Courier", "")
+            pdf.setFontSize(16)
+            pdf.text(total, 195, this.hasLogo ? (132 + this.prodCount * 5) : (118 + (this.prodCount * 5)), 'right')
+
+            this.hasLogo
+              ? pdf.line(200, (140 + (this.prodCount * 5)), 10, (140 + (this.prodCount * 5)), 'DF')
+              : pdf.line(200, (122 + (this.prodCount * 5)), 10, (122 + (this.prodCount * 5)), 'DF')
+          }
+
+          if (this.servCount > 0) {
+            pdf.setFont("Courier", "Bold")
+            pdf.setFontSize(18)
+            pdf.text('Valor Total', 195, this.hasLogo ? (125 + this.servCount * 5) : (110 + (this.servCount * 5)), 'right')
+            pdf.setFont("Courier", "")
+            pdf.setFontSize(16)
+            pdf.text(total, 195, this.hasLogo ? (132 + this.servCount * 5) : (118 + (this.servCount * 5)), 'right')
+
+            this.hasLogo
+              ? pdf.line(200, (140 + (this.servCount * 5)), 10, (140 + (this.servCount * 5)), 'DF')
+              : pdf.line(200, (122 + (this.servCount * 5)), 10, (122 + (this.servCount * 5)), 'DF')
+          }
+
+          if (this.BudgetData.Info) {
+            pdf.setFont("Courier", "Bold")
+            pdf.setFontSize(12)
+            pdf.text('Mais detalhes', 10, this.hasLogo ? (150 + ((this.servCount + this.prodCount) * 5)) : (130 + ((this.servCount + this.prodCount) * 5)))
+            pdf.setFont("Courier", "")
+            var InfoBudget = pdf.splitTextToSize(this.BudgetData.Info, 195)
+            pdf.text(InfoBudget, 10, this.hasLogo ? (157 + ((this.servCount + this.prodCount) * 5)) : (137 + ((this.servCount + this.prodCount) * 5)))
+            // this.hasLogo
+            //   ? pdf.line(200, (180 + (this.servCount * 5)), 10, (180 + (this.servCount * 5)), 'DF')
+            //   : pdf.line(200, (160 + (this.servCount * 5)), 10, (160 + (this.servCount * 5)), 'DF')
+
+            if (this.hasLogo) {
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (190 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (190 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (200 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (200 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (210 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (210 + (this.servCount * 5)))
+            }
+            else {
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (170 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (170 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (180 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (180 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (190 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (190 + (this.servCount * 5)))
+            }
+          }
+          else {
+            if (this.hasLogo) {
+              pdf.setFontSize(12)
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (160 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (160 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (170 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (170 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (180 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (180 + (this.servCount * 5)))
+
+            }
+            else {
+              pdf.setFontSize(12)
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Validade do orçamento:', 10, (140 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Valid ? this.BudgetData.Valid : 'indefinido.', 70, (140 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Garantia:', 10, (150 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(this.BudgetData.Warranty ? this.BudgetData.Warranty : 'sem garantia.', 70, (150 + (this.servCount * 5)))
+
+              pdf.setFont("Courier", "Bold")
+              pdf.text('Forma de Pagamento:', 10, (160 + (this.servCount * 5)))
+              pdf.setFont("Courier", "")
+              pdf.text(`${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`, 70, (160 + (this.servCount * 5)))
+            }
+          }
+
+        }
       }
+
+      pdf.setFontSize(8)
+      pdf.setFont('Courier', 'Bold')
+      pdf.setTextColor(56, 84, 153)
+      pdf.textWithLink('Gerado por PDFgen', 10, 285, { url: 'https://pdf-gen-rho.vercel.app/' })
+      pdf.text('https://pdf-gen-rho.vercel.app/', 200, 285, 'right')
 
       pdf.save("Orçamento.pdf")
     },
