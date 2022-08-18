@@ -135,6 +135,7 @@ section div {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 0%;
+    gap: 10px;
 }
 
 .chooseLogo {
@@ -168,8 +169,8 @@ section div {
     color: white;
 }
 
-.moreSpace {
-    width: 60%;
+.moreSpace, .multSpace div {
+    width: 100%;
 }
 
 .addValue {
