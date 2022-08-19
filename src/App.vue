@@ -183,7 +183,7 @@
         <div class="multSpace">
           <div class="form-floating">
             <input
-              type="number"
+              type="text"
               class="form-control"
               id="BudgetID"
               v-maska="'###'"
@@ -223,7 +223,7 @@
               id="Budget_Payment"
               aria-label="payment"
               placeholder="data"
-              v-model="BudgetData.payment"
+              v-model="BudgetData.Payment"
               required
             >
               <option
@@ -462,6 +462,13 @@
       >
         Há campos importantes não estão preenchidos!
       </div>
+      <div
+        class="alert alert-danger w-75 text-center"
+        role="alert"
+        v-show="no_itens"
+      >
+        Adicione pelo menos um produto ou serviço!
+      </div>
 
       <button
         id="DonwloadPDF"
@@ -521,6 +528,7 @@ export default {
       servCount: 0, // Contagem de quantos serviços foram incluidos
       hasLogo: false, // Valida se tem logo
       errorEmpty: false, // Valida se teve campo vazio ou algum erro
+      no_itens: false, // Valida se tem algum produto ou serviço
       // Valores para os campos de option no html
       payment: ["Boleto", "Cartão", "Pix", "Transferência", "Outros"],
       metricOptionProd: ["un", "m", "m²", "cm", "km", "g", "L", "kg"],
@@ -532,6 +540,7 @@ export default {
     // Metodo para adicionar produto/serviço
     addItem(prop) {
       prop == "product" ? (this.prodCount += 1) : (this.servCount += 1);
+      this.no_itens = false
     },
     // Metodo para remover produto/serviço
     removeItem(prop) {
@@ -547,15 +556,36 @@ export default {
         !this.EmitData.Name ||
         !this.EmitData.Tel ||
         !this.EmitData.Email ||
+        //---------
         !this.DestData.Name ||
         !this.DestData.Tel ||
         !this.DestData.Address ||
+        !this.DestData.Num ||
         !this.DestData.City ||
         !this.DestData.Cep ||
-        !this.ProdData.Name ||
-        !this.ServData.Name ||
+        //---------
         !this.BudgetData.ID ||
-        !this.BudgetData.PayTimes;
+        !this.BudgetData.PayTimes ||
+        !this.BudgetData.Payment;
+
+      if (this.prodCount > 0) {
+        var prodValid =
+          !this.ProdData.Name ||
+          !this.ProdData.Value ||
+          !this.ProdData.Count ||
+          !this.ProdData.Metric;
+
+        prodValid == true ? (this.errorEmpty = true) : "";
+      }
+      if (this.servCount > 0) {
+        var servValid =
+          !this.ServData.Name ||
+          !this.ServData.Value ||
+          !this.ServData.Count ||
+          !this.ServData.Metric;
+
+        servValid == true ? (this.errorEmpty = true) : "";
+      }
 
       // Caso algum campo esteja vazio ele retorna verdadeiro na variavel
       if (inputData) this.errorEmpty = true;
@@ -563,8 +593,9 @@ export default {
     },
 
     SavePDF() {
-      //this.validing();
-      //if (this.errorEmpty) return;
+      this.validing();
+      if (this.prodCount == 0 || this.servCount == 0) this.no_itens = true;
+      if (this.errorEmpty || this.no_itens) return;
 
       // Instancia do jsPDF
       var pdf = new jsPDF("p", "mm", [297, 210]),
@@ -889,7 +920,7 @@ export default {
               );
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 210 + (this.servCount + this.prodCount) * 5
               );
@@ -930,7 +961,7 @@ export default {
               );
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 180 + (this.servCount + this.prodCount) * 5
               );
@@ -974,7 +1005,7 @@ export default {
               );
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 180 + (this.servCount + this.prodCount) * 5
               );
@@ -1016,7 +1047,7 @@ export default {
               );
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 150 + (this.servCount + this.prodCount) * 5
               );
@@ -1205,7 +1236,7 @@ export default {
               pdf.text("Forma de Pagamento:", 10, 210 + this.servCount * 5);
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 210 + this.servCount * 5
               );
@@ -1234,7 +1265,7 @@ export default {
               pdf.text("Forma de Pagamento:", 10, 190 + this.servCount * 5);
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 190 + this.servCount * 5
               );
@@ -1266,7 +1297,7 @@ export default {
               pdf.text("Forma de Pagamento:", 10, 180 + this.prodCount * 5);
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 180 + this.prodCount * 5
               );
@@ -1296,7 +1327,7 @@ export default {
               pdf.text("Forma de Pagamento:", 10, 160 + this.prodCount * 5);
               pdf.setFont("Courier", "");
               pdf.text(
-                `${this.BudgetData.payment} /${this.BudgetData.PayTimes}x`,
+                `${this.BudgetData.Payment} /${this.BudgetData.PayTimes}x`,
                 70,
                 160 + this.prodCount * 5
               );
