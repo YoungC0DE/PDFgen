@@ -568,25 +568,8 @@ export default {
         !this.BudgetData.PayTimes ||
         !this.BudgetData.Payment;
 
-      if (this.prodCount > 0) {
-        var prodValid =
-          !this.ProdData.Name ||
-          !this.ProdData.Value ||
-          !this.ProdData.Count ||
-          !this.ProdData.Metric;
-
-        prodValid == true ? (this.errorEmpty = true) : "";
-      }
-      if (this.servCount > 0) {
-        var servValid =
-          !this.ServData.Name ||
-          !this.ServData.Value ||
-          !this.ServData.Count ||
-          !this.ServData.Metric;
-
-        servValid == true ? (this.errorEmpty = true) : "";
-      }
-
+      // Se não tiver nenhum serviço ou produto ele retorna erro, também
+      if (this.prodCount == 0 && this.servCount == 0) this.no_itens = true;
       // Caso algum campo esteja vazio ele retorna verdadeiro na variavel
       if (inputData) this.errorEmpty = true;
       else this.errorEmpty = false;
@@ -594,7 +577,6 @@ export default {
 
     SavePDF() {
       this.validing();
-      if (this.prodCount == 0 || this.servCount == 0) this.no_itens = true;
       if (this.errorEmpty || this.no_itens) return;
 
       // Instancia do jsPDF
