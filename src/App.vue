@@ -281,7 +281,7 @@
             type="button"
             v-on:click="removeItem('product')"
           >
-            Remover Produto <i class="bi bi-dash-circle"></i>
+            Remover <i class="bi bi-dash-circle"></i>
           </button>
         </div>
         <hr />
@@ -368,7 +368,7 @@
             v-on:click="addItem('service')"
             v-show="servCount < 10"
           >
-            Adicionar Serviço ({{ servCount }}/10)<i
+            Adicionar Serviço ({{ servCount }}/10) <i
               class="bi bi-plus-circle"
             ></i>
           </button>
@@ -379,7 +379,7 @@
             type="button"
             v-on:click="removeItem('service')"
           >
-            Remover Serviço <i class="bi bi-dash-circle"></i>
+            Remover <i class="bi bi-dash-circle"></i>
           </button>
         </div>
         <hr />
