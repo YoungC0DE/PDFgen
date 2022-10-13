@@ -1322,7 +1322,7 @@ export default {
       pdf.setFont("Courier", "Bold");
       pdf.setTextColor(56, 84, 153);
       pdf.textWithLink("Gerado por PDFgen", 10, 285, {
-        url: "https://pdf-gen-rho.vercel.app/",
+        url: "https://github.com/YoungC0DE",
       });
       pdf.text("https://pdf-gen-rho.vercel.app/", 200, 285, "right");
 
