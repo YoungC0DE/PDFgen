@@ -1039,7 +1039,7 @@ export default {
           }
           //=============================== tem produto e serviço - fim =========================
         } else {
-          // Caso tenha somente produto, ou somente serviço, o layout é outro.
+          // Caso tenha somente um produto ou serviço, o layout é outro.
           for (let x = 0; x < this.prodCount; x++) {
             pdf.setFont("Courier", "Bold");
             pdf.text("Produto:", 10, this.hasLogo ? 120 + x * 5 : 100 + x * 5);
@@ -1078,9 +1078,7 @@ export default {
             TotalValueServ += parseInt(
               totalTemp.substring(0, totalTemp.length - 2)
             );
-            this.ServData.Count[y] > 1
-              ? (QtaServ += this.ServData.Count[y])
-              : 0;
+            QtaServ += this.ServData.Count[y];
           }
           // ================= so serviço - fim ================
           // Definindo o valor total de produtos e serviços
