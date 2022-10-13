@@ -577,7 +577,7 @@ export default {
 
     SavePDF() {
       this.validing();
-      if (this.errorEmpty || this.no_itens) return;
+      // if (this.errorEmpty || this.no_itens) return;
 
       // Instancia do jsPDF
       var pdf = new jsPDF("p", "mm", [297, 210]),
