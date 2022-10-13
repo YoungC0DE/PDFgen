@@ -503,6 +503,8 @@
 import jsPDF from "jspdf";
 import { maska } from "maska";
 
+// O código abaixo eu que fiz, porém não faço a mínima ideia de como fiz e nem o que faz. Só sei que "funciona"
+
 export default {
   name: "App",
   data() {
@@ -796,7 +798,7 @@ export default {
             TotalValueServ += parseInt(
               totalTemp.substring(0, totalTemp.length - 2)
             );
-            this.ServData.Count[y] > 1
+            this.ServData.Count[y] >= 1
               ? (QtaServ += this.ServData.Count[y])
               : 0;
           }
