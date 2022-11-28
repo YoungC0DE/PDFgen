@@ -456,14 +456,14 @@
       </section>
 
       <div
-        class="alert alert-danger w-75 text-center"
+        class="alert alert-warning w-75 text-center"
         role="alert"
         v-show="errorEmpty"
       >
         Há campos importantes não estão preenchidos!
       </div>
       <div
-        class="alert alert-danger w-75 text-center"
+        class="alert alert-warning w-75 text-center"
         role="alert"
         v-show="no_itens"
       >
