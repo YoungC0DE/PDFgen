@@ -9,6 +9,8 @@ Made to generate budget PDFs and make your negotiations more professional
 - boostrap;
 - v-maska;
 
+#
+
 <div align="center">
 
   [![ShoppingList](https://img.shields.io/badge/PDFgen-Visit-9cf?style=for-the-badge&logo=vercel)](https://pdf-gen-rho.vercel.app/)
