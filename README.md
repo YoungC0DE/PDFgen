@@ -11,4 +11,4 @@ Made to generate budget PDFs and make your negotiations more professional
 
 [![ShoppingList](https://img.shields.io/badge/PDFgen-Visit-9cf?style=for-the-badge&logo=vercel)](https://pdf-gen-rho.vercel.app/)
 
-<img src="https://user-images.githubusercontent.com/68437256/233806331-07ad28e8-c274-478d-8fab-2cdae20bdc7b.png" width="500">
+<img src="https://user-images.githubusercontent.com/68437256/233816224-00646872-7570-4267-a1d5-bf027636c718.png" width="500">
