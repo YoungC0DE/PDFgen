@@ -6,9 +6,7 @@
       </a>
 
       <div class="menuOptions">
-        <a href="https://reciboonline.com/orcamento/" target="_blank"
-          >References</a
-        >
+        <a href="https://reciboonline.com/orcamento/" target="_blank">References</a>
         <a href="#footer">About</a>
       </div>
     </nav>
@@ -22,74 +20,34 @@
       <section>
         <p><i class="bi bi-info-square-fill"></i> Dados do Emissor</p>
         <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="Emit_Name"
-            v-model="EmitData.Name"
-            placeholder="data"
-            required
-          />
+          <input type="text" class="form-control" id="Emit_Name" v-model="EmitData.Name" placeholder="data" required />
           <label for="Emit_Name">Nome ou Razão Social</label>
         </div>
 
         <div class="form-floating">
-          <input
-            type="tel"
-            class="form-control"
-            id="Emit_Tel"
-            v-model="EmitData.Tel"
-            v-maska="['(##) ####-####', '(##) #####-####']"
-            placeholder="data"
-            required
-          />
+          <input type="tel" class="form-control" id="Emit_Tel" v-model="EmitData.Tel" v-maska="['(##) ####-####', '(##) #####-####']" placeholder="data" required />
           <label for="Emit_Tel">Telefone ou Celular</label>
         </div>
 
         <div class="form-floating">
-          <input
-            type="email"
-            class="form-control"
-            id="Emit_Email"
-            placeholder="data"
-            v-model="EmitData.Email"
-            required
-          />
+          <input type="email" class="form-control" id="Emit_Email" placeholder="data" v-model="EmitData.Email" required />
           <label for="Emit_Email">Email</label>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <input
-              type="url"
-              class="form-control"
-              id="Emit_Site"
-              placeholder="data"
-              v-model="EmitData.Site"
-            />
+            <input type="url" class="form-control" id="Emit_Site" placeholder="data" v-model="EmitData.Site" />
             <label for="Emit_Site">Website</label>
           </div>
 
           <div class="chooseLogo">
             <label :for="hasLogo ? '' : 'Emit_logo'">
-              <span class="deleteLogo" v-if="hasLogo" v-on:click="deletLogo()"
-                >Remove Logo</span
-              >
+              <span class="deleteLogo" v-if="hasLogo" v-on:click="deletLogo()">Remove Logo</span>
               <span v-else>Upload Logo</span>
-              <i
-                class="deleteLogo bi bi-file-check-fill"
-                v-if="hasLogo"
-                v-on:click="deletLogo()"
-              ></i>
+              <i class="deleteLogo bi bi-file-check-fill" v-if="hasLogo" v-on:click="deletLogo()"></i>
               <i class="bi bi-file-earmark-image" v-else></i>
             </label>
-            <input
-              class="form-control d-none"
-              type="file"
-              id="Emit_logo"
-              accept="image/png, image/jpg, image/jpeg"
-              v-on:input="injectNewPic()"
-            />
+            <input class="form-control d-none" type="file" id="Emit_logo" accept="image/png, image/jpg, image/jpeg" v-on:input="injectNewPic()" />
           </div>
         </div>
       </section>
@@ -97,82 +55,35 @@
       <section>
         <p><i class="bi bi-info-square-fill"></i> Dados do Destinatário</p>
         <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="Dest_Name"
-            placeholder="data"
-            v-model="DestData.Name"
-            required
-          />
+          <input type="text" class="form-control" id="Dest_Name" placeholder="data" v-model="DestData.Name" required />
           <label for="Dest_Name">Nome ou Razão Social</label>
         </div>
 
         <div class="form-floating">
-          <input
-            type="tel"
-            class="form-control"
-            id="Dest_Tel"
-            placeholder="data"
-            v-model="DestData.Tel"
-            v-maska="['(##) ####-####', '(##) #####-####']"
-            required
-          />
+          <input type="tel" class="form-control" id="Dest_Tel" placeholder="data" v-model="DestData.Tel" v-maska="['(##) ####-####', '(##) #####-####']" required />
           <label for="Dest_Tel">Telefone ou Celular</label>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="Dest_Address"
-              placeholder="data"
-              v-model="DestData.Address"
-              required
-            />
+            <input type="text" class="form-control" id="Dest_Address" placeholder="data" v-model="DestData.Address" required />
             <label for="Dest_Address">Endereço</label>
           </div>
 
           <div class="form-floating">
-            <input
-              type="number"
-              class="form-control"
-              id="Dest_Addnum"
-              placeholder="data"
-              min="0"
-              v-model="DestData.Num"
-              required
-            />
+            <input type="number" class="form-control" id="Dest_Addnum" placeholder="data" min="0" v-model="DestData.Num" required />
             <label for="Dest_Addnum">Número</label>
           </div>
         </div>
 
         <div class="multSpace">
           <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="Dest_Address"
-              placeholder="data"
-              v-maska="'#####-###'"
-              min="0"
-              max="8"
-              v-model="DestData.Cep"
-              required
-            />
+            <input type="text" class="form-control" id="Dest_Address" placeholder="data" v-maska="'#####-###'" min="0" max="8" v-model="DestData.Cep" required />
             <label for="Dest_Address">CEP</label>
           </div>
 
           <div class="moreSpace form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="Dest_City"
-              placeholder="data"
-              v-model="DestData.City"
-              required
-            />
+            <input type="text" class="form-control" id="Dest_City" placeholder="data" v-model="DestData.City" required />
             <label for="Dest_City">Cidade</label>
           </div>
         </div>
@@ -182,55 +93,24 @@
         <p><i class="bi bi-info-square-fill"></i> Dados do orçamento</p>
         <div class="multSpace">
           <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="BudgetID"
-              v-maska="'###'"
-              placeholder="data"
-              v-model="BudgetData.ID"
-              required
-            />
+            <input type="text" class="form-control" id="BudgetID" v-maska="'###'" placeholder="data" v-model="BudgetData.ID" required />
             <label for="BudgetID">Número do orçamento</label>
           </div>
 
           <div class="form-floating">
-            <input
-              type="date"
-              class="form-control"
-              id="Budget_Valid"
-              placeholder="data"
-              v-model="BudgetData.Valid"
-            />
+            <input type="date" class="form-control" id="Budget_Valid" placeholder="data" v-model="BudgetData.Valid" />
             <label for="Budget_Valid">Validade</label>
           </div>
           <div class="form-floating">
-            <input
-              type="date"
-              class="form-control"
-              id="Budget_Warranty"
-              placeholder="data"
-              v-model="BudgetData.Warranty"
-            />
+            <input type="date" class="form-control" id="Budget_Warranty" placeholder="data" v-model="BudgetData.Warranty" />
             <label for="Budget_Warranty">Garantia</label>
           </div>
         </div>
 
         <div class="multSpace">
           <div class="moreSpace form-floating">
-            <select
-              class="form-select"
-              id="Budget_Payment"
-              aria-label="payment"
-              placeholder="data"
-              v-model="BudgetData.Payment"
-              required
-            >
-              <option
-                v-for="option in payment"
-                selected="{{option == BudgetData.Payment}}"
-                :key="option"
-              >
+            <select class="form-select" id="Budget_Payment" aria-label="payment" placeholder="data" v-model="BudgetData.Payment" required>
+              <option v-for="option in payment" selected="{{option == BudgetData.Payment}}" :key="option">
                 {{ option }}
               </option>
             </select>
@@ -238,83 +118,36 @@
           </div>
 
           <div class="form-floating">
-            <input
-              type="number"
-              class="form-control"
-              id="Budget_fractPay"
-              min="1"
-              placeholder="data"
-              v-model="BudgetData.PayTimes"
-              required
-            />
+            <input type="number" class="form-control" id="Budget_fractPay" min="1" placeholder="data" v-model="BudgetData.PayTimes" required />
             <label for="Budget_fractPay">Quantas vezes</label>
           </div>
         </div>
 
         <div class="form-floating">
-          <textarea
-            class="form-control"
-            placeholder="data"
-            id="Budget_Desc"
-            maxlength="250"
-            style="height: 100px"
-            v-model="BudgetData.Info"
-          ></textarea>
+          <textarea class="form-control" placeholder="data" id="Budget_Desc" maxlength="250" style="height: 100px" v-model="BudgetData.Info"></textarea>
           <label for="Budget_Desc">Informações Adicionais</label>
         </div>
 
         <div class="areaAddRemoveItem">
-          <button
-            id="addProd"
-            class="addValue"
-            type="button"
-            v-on:click="addItem('product')"
-            v-show="prodCount < 10"
-          >
+          <button id="addProd" class="addValue" type="button" v-on:click="addItem('product')" v-show="prodCount < 10">
             Adicionar Produto ({{ prodCount }}/10)
             <i class="bi bi-plus-circle"></i>
           </button>
-          <button
-            id="removeProd"
-            class="addValue"
-            v-if="prodCount > 0"
-            type="button"
-            v-on:click="removeItem('product')"
-          >
+          <button id="removeProd" class="addValue" v-if="prodCount > 0" type="button" v-on:click="removeItem('product')">
             Remover <i class="bi bi-dash-circle"></i>
           </button>
         </div>
         <hr />
 
-        <div
-          class="product"
-          :show="prodCount > 0"
-          v-for="i in prodCount"
-          :key="i"
-        >
+        <div class="product" :show="prodCount > 0" v-for="i in prodCount" :key="i">
           <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="Prod_Name"
-              maxlength="20"
-              placeholder="data"
-              v-model="ProdData.Name[i - 1]"
-              required
-            />
+            <input type="text" class="form-control" id="Prod_Name" maxlength="20" placeholder="data" v-model="ProdData.Name[i - 1]" required />
             <label for="Prod_Name">Nome do Produto</label>
           </div>
 
           <div class="multSpace">
             <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="Prod_value"
-                min="0"
-                placeholder="data"
-                v-model="ProdData.Value[i - 1]"
-                v-maska="[
+              <input type="text" class="form-control" id="Prod_value" min="0" placeholder="data" v-model="ProdData.Value[i - 1]" v-maska="[
                   'R$ #,##',
                   'R$ ##,##',
                   'R$ ###,##',
@@ -324,96 +157,42 @@
                   'R$ #.###.###,##',
                   'R$ ##.###.###,##',
                   'R$ ###.###.###,##',
-                ]"
-                required
-              />
+                ]" required />
               <label for="Prod_value">Valor</label>
             </div>
 
             <div class="form-floating">
-              <input
-                type="number"
-                class="form-control"
-                id="Prod_count"
-                placeholder="data"
-                min="1"
-                v-model="ProdData.Count[i - 1]"
-                required
-              />
+              <input type="number" class="form-control" id="Prod_count" placeholder="data" min="1" v-model="ProdData.Count[i - 1]" required />
               <label for="Prod_count">Quantidade</label>
             </div>
           </div>
           <span>Medida:</span>
-          <select
-            class="form-select"
-            aria-label="Metrics"
-            v-model="ProdData.Metric[i - 1]"
-            required
-          >
-            <option
-              v-for="option in metricOptionProd"
-              selected="{{option == ProdData.Metric[i - 1]}}"
-              :key="option"
-            >
+          <select class="form-select" aria-label="Metrics" v-model="ProdData.Metric[i - 1]" required>
+            <option v-for="option in metricOptionProd" selected="{{option == ProdData.Metric[i - 1]}}" :key="option">
               {{ option }}
             </option>
           </select>
         </div>
 
         <div class="areaAddRemoveItem" style="margin-top: 3%">
-          <button
-            id="addServ"
-            class="addValue"
-            type="button"
-            v-on:click="addItem('service')"
-            v-show="servCount < 10"
-          >
-            Adicionar Serviço ({{ servCount }}/10) <i
-              class="bi bi-plus-circle"
-            ></i>
+          <button id="addServ" class="addValue" type="button" v-on:click="addItem('service')" v-show="servCount < 10">
+            Adicionar Serviço ({{ servCount }}/10) <i class="bi bi-plus-circle"></i>
           </button>
-          <button
-            id="removeServ"
-            class="addValue"
-            v-if="servCount > 0"
-            type="button"
-            v-on:click="removeItem('service')"
-          >
+          <button id="removeServ" class="addValue" v-if="servCount > 0" type="button" v-on:click="removeItem('service')">
             Remover <i class="bi bi-dash-circle"></i>
           </button>
         </div>
         <hr />
 
-        <div
-          class="service"
-          :show="servCount > 0"
-          v-for="i in servCount"
-          :key="i"
-        >
+        <div class="service" :show="servCount > 0" v-for="i in servCount" :key="i">
           <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="Serv_Name"
-              maxlength="20"
-              placeholder="data"
-              v-model="ServData.Name[i - 1]"
-              required
-            />
+            <input type="text" class="form-control" id="Serv_Name" maxlength="20" placeholder="data" v-model="ServData.Name[i - 1]" required />
             <label for="Serv_Name">Serviço</label>
           </div>
 
           <div class="multSpace">
             <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="Serv_value"
-                placeholder="data"
-                min="0"
-                max="15"
-                v-model="ServData.Value[i - 1]"
-                v-maska="[
+              <input type="text" class="form-control" id="Serv_value" placeholder="data" min="0" max="15" v-model="ServData.Value[i - 1]" v-maska="[
                   'R$ #,##',
                   'R$ ##,##',
                   'R$ ###,##',
@@ -423,59 +202,32 @@
                   'R$ #.###.###,##',
                   'R$ ##.###.###,##',
                   'R$ ###.###.###,##',
-                ]"
-                required
-              />
+                ]" required />
               <label for="Serv_value">Valor Base</label>
             </div>
 
             <div class="form-floating">
-              <input
-                type="number"
-                class="form-control"
-                id="Serv_count"
-                placeholder="data"
-                min="1"
-                v-model="ServData.Count[i - 1]"
-                required
-              />
+              <input type="number" class="form-control" id="Serv_count" placeholder="data" min="1" v-model="ServData.Count[i - 1]" required />
               <label for="Serv_count">Quantidade</label>
             </div>
           </div>
           <span>Medida:</span>
           <select class="form-select" v-model="ServData.Metric[i - 1]" required>
-            <option
-              v-for="option in metricOptionServ"
-              selected="{{option == ServData.Metric[i - 1]}}"
-              :key="option"
-            >
+            <option v-for="option in metricOptionServ" selected="{{option == ServData.Metric[i - 1]}}" :key="option">
               {{ option }}
             </option>
           </select>
         </div>
       </section>
 
-      <div
-        class="alert alert-danger w-75 text-center"
-        role="alert"
-        v-show="errorEmpty"
-      >
+      <div class="alert alert-danger w-75 text-center" role="alert" v-show="errorEmpty">
         Há campos importantes não estão preenchidos!
       </div>
-      <div
-        class="alert alert-danger w-75 text-center"
-        role="alert"
-        v-show="no_itens"
-      >
+      <div class="alert alert-danger w-75 text-center" role="alert" v-show="no_itens">
         Adicione pelo menos um produto ou serviço!
       </div>
 
-      <button
-        id="DonwloadPDF"
-        type="submit"
-        class="DownloadPDF btn btn-success"
-        v-on:click.prevent="SavePDF"
-      >
+      <button id="DonwloadPDF" type="submit" class="DownloadPDF btn btn-success" v-on:click.prevent="SavePDF">
         Baixar PDF <i class="bi bi-download"></i>
       </button>
     </form>
@@ -484,16 +236,13 @@
       <div class="descFooter">
         Projeto desenvolvido utilizando: VueJs, Boostrap, CSS e Javascript
         <span>Mande um Email para: <b>rafaelwolowitz@gmail.com</b></span>
-        <span
-          >Link do repositório:
-          <a href="https://github.com/YoungC0DE/PDFgen" target="_blank"
-            >Github/YoungC0DE <i class="bi bi-box-arrow-up-right"></i></a
-        ></span>
+        <span>Link do repositório:
+          <a href="https://github.com/YoungC0DE/PDFgen" target="_blank">Github/YoungC0DE <i class="bi bi-box-arrow-up-right"></i></a></span>
       </div>
       <div class="AjudaEu">
         Me ajude a evoluir o projeto =)<br />
         Chave Pix:
-        <img class="pix" src="./assets/pix-pro-pai.png" width="auto" />
+        <img class="pix" src="./assets/pix-pro-pai.png" width="auto" @click="viewPix()" />
       </div>
     </footer>
   </div>
@@ -537,6 +286,9 @@ export default {
   },
   directives: { maska }, // Mascara
   methods: {
+    viewPix() {
+      window.location.href = 'https://github.com/YoungC0DE/PDFgen/blob/main/src/assets/pix-pro-pai.png?raw=true'
+    },
     // Metodo para adicionar produto/serviço
     addItem(prop) {
       prop == "product" ? (this.prodCount += 1) : (this.servCount += 1);
@@ -831,19 +583,19 @@ export default {
 
           this.hasLogo
             ? pdf.line(
-                200,
-                140 + (this.servCount + this.prodCount) * 5,
-                10,
-                140 + (this.servCount + this.prodCount) * 5,
-                "DF"
-              )
+              200,
+              140 + (this.servCount + this.prodCount) * 5,
+              10,
+              140 + (this.servCount + this.prodCount) * 5,
+              "DF"
+            )
             : pdf.line(
-                200,
-                122 + (this.servCount + this.prodCount) * 5,
-                10,
-                122 + (this.servCount + this.prodCount) * 5,
-                "DF"
-              );
+              200,
+              122 + (this.servCount + this.prodCount) * 5,
+              10,
+              122 + (this.servCount + this.prodCount) * 5,
+              "DF"
+            );
 
           if (this.BudgetData.Info) {
             pdf.setFont("Courier", "Bold");
@@ -1114,19 +866,19 @@ export default {
 
             this.hasLogo
               ? pdf.line(
-                  200,
-                  140 + this.prodCount * 5,
-                  10,
-                  140 + this.prodCount * 5,
-                  "DF"
-                )
+                200,
+                140 + this.prodCount * 5,
+                10,
+                140 + this.prodCount * 5,
+                "DF"
+              )
               : pdf.line(
-                  200,
-                  122 + this.prodCount * 5,
-                  10,
-                  122 + this.prodCount * 5,
-                  "DF"
-                );
+                200,
+                122 + this.prodCount * 5,
+                10,
+                122 + this.prodCount * 5,
+                "DF"
+              );
           }
           // ===============================================
           // ================= Valor total dos Serviços ==========
@@ -1154,19 +906,19 @@ export default {
 
             this.hasLogo
               ? pdf.line(
-                  200,
-                  140 + this.servCount * 5,
-                  10,
-                  140 + this.servCount * 5,
-                  "DF"
-                )
+                200,
+                140 + this.servCount * 5,
+                10,
+                140 + this.servCount * 5,
+                "DF"
+              )
               : pdf.line(
-                  200,
-                  122 + this.servCount * 5,
-                  10,
-                  122 + this.servCount * 5,
-                  "DF"
-                );
+                200,
+                122 + this.servCount * 5,
+                10,
+                122 + this.servCount * 5,
+                "DF"
+              );
           }
 
           // Se tiver alguma descrição, o layout muda

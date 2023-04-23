@@ -1,29 +1,14 @@
 # PDFgen
 
-This template should help get you started developing with Vue 3 in Vite.
+Made to generate budget PDFs and make your negotiations more professional
 
-## Recommended IDE Setup
+**Languages:**
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Vuejs3;
+- JSpdf;
+- boostrap;
+- v-maska;
 
-## Customize configuration
+[![ShoppingList](https://img.shields.io/badge/PDFgen-Visit-9cf?style=for-the-badge&logo=vercel)](https://pdf-gen-rho.vercel.app/)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+<img src="https://user-images.githubusercontent.com/68437256/233806331-07ad28e8-c274-478d-8fab-2cdae20bdc7b.png" width="500">
